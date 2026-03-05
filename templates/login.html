@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DiabetesAI — Admin Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-50:  #eff6ff;
+  --slate-200:#e2e8f0;
+  --slate-400:#94a3b8;
+  --slate-600:#475569;
+  --slate-800:#1e293b;
+  --red-500:  #ef4444;
+  --red-50:   #fef2f2;
+  --green-500:#22c55e;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #0369a1 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* animated bg circles */
+.bg-orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); pointer-events: none; opacity: .15;
+}
+.orb1 { width:500px;height:500px;background:#60a5fa;top:-200px;right:-100px;animation:float1 8s ease-in-out infinite; }
+.orb2 { width:400px;height:400px;background:#34d399;bottom:-150px;left:-80px; animation:float2 10s ease-in-out infinite; }
+.orb3 { width:300px;height:300px;background:#f472b6;top:50%;left:50%;animation:float3 12s ease-in-out infinite; }
+@keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,40px)} }
+@keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-30px)} }
+@keyframes float3 { 0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-50%,-50%) scale(1.1)} }
+
+/* grid pattern */
+body::before {
+  content:''; position:absolute; inset:0;
+  background-image: linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+                    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* center panel */
+.page {
+  position:relative; z-index:10;
+  width:100%; display:flex; align-items:center; justify-content:center;
+  padding: 24px;
+}
+
+.card {
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(30px);
+  border-radius: 24px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.25), 0 8px 24px rgba(0,0,0,.15);
+  width: 100%; max-width: 440px;
+  overflow: hidden;
+  animation: cardIn .5s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes cardIn {
+  from { opacity:0; transform:translateY(30px) scale(.96); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+
+/* card header */
+.card-header {
+  background: linear-gradient(135deg, var(--blue-700), var(--blue-800));
+  padding: 36px 36px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.card-header::after {
+  content:'';position:absolute;inset:0;
+  background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(255,255,255,.1), transparent);
+}
+.logo-wrap {
+  width: 72px; height: 72px; background: rgba(255,255,255,.15);
+  border-radius: 20px; display:flex; align-items:center; justify-content:center;
+  font-size: 36px; margin: 0 auto 16px;
+  border: 1px solid rgba(255,255,255,.2);
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  position:relative; z-index:1;
+  animation: pulse-logo 2.5s ease-in-out infinite;
+}
+@keyframes pulse-logo {
+  0%,100% { box-shadow: 0 8px 24px rgba(0,0,0,.2), 0 0 0 0 rgba(255,255,255,.3); }
+  50%      { box-shadow: 0 8px 24px rgba(0,0,0,.2), 0 0 0 10px rgba(255,255,255,0); }
+}
+.card-header h1 { font-size:24px; font-weight:800; color:#fff; letter-spacing:-.5px; position:relative;z-index:1; }
+.card-header p  { font-size:13px; color:rgba(255,255,255,.7); margin-top:4px; position:relative;z-index:1; }
+.card-header .urdu { font-family:'Noto Nastaliq Urdu',serif; font-size:15px; color:rgba(255,255,255,.75); display:block; margin-top:4px; }
+
+/* admin badge */
+.admin-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.25);
+  border-radius:99px; padding:4px 14px; font-size:11px; color:rgba(255,255,255,.9);
+  letter-spacing:.5px; margin-top:12px; position:relative;z-index:1;
+}
+.lock-icon { font-size:10px; }
+
+/* form body */
+.card-body { padding: 32px 36px 36px; }
+
+.field { margin-bottom: 18px; }
+.field label {
+  display:block; font-size:12px; font-weight:700; color:var(--slate-600);
+  letter-spacing:.6px; text-transform:uppercase; margin-bottom:8px;
+}
+.input-wrap { position:relative; }
+.input-icon {
+  position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  font-size:17px; pointer-events:none;
+}
+.input-wrap input {
+  width:100%; padding:14px 14px 14px 46px;
+  border:1.5px solid var(--slate-200); border-radius:12px;
+  font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:600;
+  color:var(--slate-800); background:#f8fafc; outline:none;
+  transition: all .2s;
+}
+.input-wrap input:focus {
+  border-color:var(--blue-600); background:#fff;
+  box-shadow:0 0 0 4px rgba(37,99,235,.1);
+}
+.input-wrap input.error {
+  border-color:var(--red-500); background:var(--red-50);
+}
+
+/* password toggle */
+.eye-btn {
+  position:absolute; right:14px; top:50%; transform:translateY(-50%);
+  background:none; border:none; cursor:pointer; font-size:18px; padding:0;
+  color:var(--slate-400); transition:.2s;
+}
+.eye-btn:hover { color:var(--slate-600); }
+
+/* error alert */
+.error-alert {
+  display:flex; align-items:center; gap:10px;
+  background:var(--red-50); border:1.5px solid #fca5a5;
+  border-radius:12px; padding:12px 16px; margin-bottom:20px;
+  animation:shake .4s ease;
+}
+@keyframes shake {
+  0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)}
+}
+.error-alert span { font-size:13px; font-weight:600; color:#b91c1c; }
+
+/* submit btn */
+.btn-login {
+  width:100%; padding:15px; border:none; border-radius:12px;
+  background:linear-gradient(135deg, var(--blue-600), var(--blue-700));
+  color:#fff; font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:15px; font-weight:700; cursor:pointer;
+  box-shadow:0 6px 20px rgba(37,99,235,.35);
+  transition:all .25s; display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.btn-login:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(37,99,235,.4); }
+.btn-login:active { transform:translateY(0); }
+
+/* hint */
+.creds-hint {
+  margin-top:20px; padding:14px; background:var(--blue-50);
+  border-radius:10px; border:1px solid #bfdbfe;
+  font-size:12px; color:var(--blue-700);
+}
+.creds-hint strong { display:block; margin-bottom:4px; }
+.creds-hint code {
+  background:rgba(37,99,235,.1); padding:2px 8px; border-radius:5px;
+  font-family:monospace; font-size:13px;
+}
+
+/* back link */
+.back-link {
+  display:block; text-align:center; margin-top:20px;
+  font-size:13px; color:var(--slate-400); text-decoration:none;
+  transition:.2s;
+}
+.back-link:hover { color:var(--blue-600); }
+
+/* spinner */
+.spinner {
+  width:18px;height:18px;
+  border:2.5px solid rgba(255,255,255,.35);
+  border-top-color:#fff; border-radius:50%;
+  animation:spin .7s linear infinite; display:none;
+}
+@keyframes spin { to{transform:rotate(360deg)} }
+</style>
+</head>
+<body>
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
+
+<div class="page">
+  <div class="card">
+
+    <!-- Header -->
+    <div class="card-header">
+      <div class="logo-wrap"></div>
+      <h1>DiabetesAI</h1>
+      <p>Doctor Dashboard — Admin Access Only</p>
+      <span class="urdu">ڈاکٹر پینل — صرف ایڈمن کے لیے</span>
+      <div class="admin-badge"><span class="lock-icon"></span> RESTRICTED ACCESS</div>
+    </div>
+
+    <!-- Form Body -->
+    <div class="card-body">
+
+      {% if error %}
+      <div class="error-alert">
+        <span>❌</span>
+        <span>{{ error }}</span>
+      </div>
+      {% endif %}
+
+      <form method="POST" action="/login" onsubmit="handleSubmit(event)">
+
+        <div class="field">
+          <label>Admin Username</label>
+          <div class="input-wrap">
+            <span class="input-icon"></span>
+            <input type="text" name="username" id="username"
+              placeholder="Enter username" autocomplete="username"
+              value="{{ request.form.get('username', '') }}"
+              {% if error %}class="error"{% endif %} required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <div class="input-wrap">
+            <span class="input-icon"></span>
+            <input type="password" name="password" id="password"
+              placeholder="Enter password" autocomplete="current-password"
+              {% if error %}class="error"{% endif %} required>
+            <button type="button" class="eye-btn" onclick="togglePwd()" id="eyeBtn">👁</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">
+          <span id="btnText">Login to Dashboard</span>
+          <div class="spinner" id="btnSpinner"></div>
+        </button>
+
+      </form>
+
+      <!-- Default credentials hint -->
+      <div class="creds-hint">
+        <strong>🔐 Default Credentials (change in app.py):</strong>
+        Username: <code>admin</code> &nbsp;|&nbsp; Password: <code>doctor@123</code>
+      </div>
+
+      <a href="/" class="back-link">← Back to Patient Portal</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function togglePwd() {
+  const inp = document.getElementById('password');
+  const btn = document.getElementById('eyeBtn');
+  if(inp.type === 'password') { inp.type='text'; btn.textContent='🙈'; }
+  else { inp.type='password'; btn.textContent='👁'; }
+}
+
+function handleSubmit(e) {
+  const btn = document.getElementById('loginBtn');
+  const txt = document.getElementById('btnText');
+  const sp  = document.getElementById('btnSpinner');
+  txt.style.display = 'none';
+  sp.style.display  = 'block';
+  btn.disabled = true;
+  // allow form to submit naturally
+}
+</script>
+</body>
+</html>
