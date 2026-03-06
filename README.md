@@ -1,11 +1,11 @@
-# 🩺 DiabetesAI — ذیابیطس ڈیٹیکشن سسٹم
-
-AI-Powered Diabetes Detection Website | Urdu + English
+ DIABETES - AI 
+ 
+I-Powered Diabetes Detection Website | Urdu + English
 Built with: Python + Flask + ML (Random Forest) + Claude AI
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ```
 diabetes-project/
@@ -21,7 +21,7 @@ diabetes-project/
 
 ---
 
-## 🚀 Setup Instructions (English)
+##  Setup Instructions (English)
 
 ### Step 1 - Install Python
 - Download Python 3.10+ from https://python.org
@@ -80,7 +80,7 @@ python app.py
 
 ---
 
-## 🤖 AI Integration (Optional)
+# AI Integration (Optional)
 
 1. Go to https://anthropic.com → Sign Up → API Keys
 2. Create new key → Copy it
@@ -89,7 +89,7 @@ python app.py
 
 ---
 
-## 📊 Model Details
+# Model Details
 
 - Algorithm: Random Forest Classifier
 - Accuracy: 94.5%
@@ -97,10 +97,3 @@ python app.py
 - Dataset: PIMA Indians Diabetes (style)
 
 ---
-
-## ⚠️ Disclaimer
-
-This tool is for educational/screening purposes only.
-Always consult a qualified doctor for medical diagnosis.
-
-یہ صرف معلوماتی مقاصد کے لیے ہے۔ طبی تشخیص کے لیے ڈاکٹر سے ملیں۔
