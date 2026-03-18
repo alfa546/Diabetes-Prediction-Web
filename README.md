@@ -2,7 +2,7 @@
  
 I-Powered Diabetes Detection Website | Urdu + English
 Built with: Python + Flask + ML (Random Forest) + Claude AI
-
+Use and check issues
 ---
 
 # 📁 Project Structure
