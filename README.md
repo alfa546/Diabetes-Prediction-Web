@@ -1,99 +1,46 @@
- DIABETES - AI 
- 
-I-Powered Diabetes Detection Website | Urdu + English
-Built with: Python + Flask + ML (Random Forest) + Claude AI
-Use and check issues
----
+🩺 AI-Powered Diabetes Detection
+A machine learning web application for diabetes risk prediction, with bilingual support (English & Urdu) and optional AI-powered health advice via Claude.
+Built with: Python · Flask · Scikit-learn (Random Forest) ·
 
-# 📁 Project Structure
-
-```
+Project Structure
 diabetes-project/
-├── app.py                  ← Flask server (main file)
-├── requirements.txt        ← Python packages
+├── app.py                  ← Flask application (entry point)
+├── requirements.txt        ← Python dependencies
 ├── model/
-│   ├── train_model.py      ← ML model training
+│   ├── train_model.py      ← ML model training script
 │   ├── diabetes_model.pkl  ← Trained model (auto-generated)
-│   └── scaler.pkl          ← Data scaler (auto-generated)
+│   └── scaler.pkl          ← Feature scaler (auto-generated)
 └── templates/
-    └── index.html          ← Website frontend
-```
+    └── index.html          ← Frontend interface
 
----
+Getting Started
+Prerequisites
 
-##  Setup Instructions (English)
+Python 3.10 or higher — download from python.org
+During installation on Windows, make sure to check "Add Python to PATH"
 
-### Step 1 - Install Python
-- Download Python 3.10+ from https://python.org
-- Make sure to check "Add to PATH" during installation
 
-### Step 2 - Install packages
-Open terminal/command prompt in this folder and run:
-```bash
-pip install -r requirements.txt
-```
-
-### Step 3 - Train the ML Model
-```bash
-cd model
+Step 1 — Install Dependencies
+Open a terminal in the project root directory and run:
+bashpip install -r requirements.txt
+Step 2 — Train the ML Model
+bashcd model
 python train_model.py
 cd ..
-```
-This will create `diabetes_model.pkl` and `scaler.pkl`
+This will generate diabetes_model.pkl and scaler.pkl in the model/ directory.
+Step 3 — Start the Server
+bashpython app.py
+Step 4 — Open in Browser
+Navigate to: http://localhost:5000
 
-### Step 4 - Start the Website
-```bash
-python app.py
-```
+AI-Powered Advice (Optional)
+To enable personalized AI recommendations:
 
-### Step 5 - Open in Browser
-Go to: **http://localhost:5000**
+Visit anthropic.com and create an account
+Go to API Keys and generate a new key
+Copy the key and paste it into the API Key field on the website
+The app will now provide Claude-powered health insights alongside predictions
 
----
 
-## 🚀 Setup (اردو میں)
-
-### پہلا قدم - Python انسٹال کریں
-- https://python.org سے Python 3.10+ ڈاؤنلوڈ کریں
-- انسٹال کے دوران "Add to PATH" ضرور چیک کریں
-
-### دوسرا قدم - پیکیجز انسٹال کریں
-اس فولڈر میں terminal کھولیں اور یہ چلائیں:
-```
-pip install -r requirements.txt
-```
-
-### تیسرا قدم - ML Model بنائیں
-```
-cd model
-python train_model.py
-cd ..
-```
-
-### چوتھا قدم - Website شروع کریں
-```
-python app.py
-```
-
-### پانچواں قدم - Browser میں کھولیں
-یہاں جائیں: **http://localhost:5000**
-
----
-
-# AI Integration (Optional)
-
-1. Go to https://anthropic.com → Sign Up → API Keys
-2. Create new key → Copy it
-3. Paste in the API Key box on the website
-4. Get personalized AI-powered advice!
-
----
-
-# Model Details
-
-- Algorithm: Random Forest Classifier
-- Accuracy: 94.5%
-- Features: Glucose, BMI, Age, Blood Pressure, Insulin, Skin Thickness, Pregnancies, DPF
-- Dataset: PIMA Indians Diabetes (style)
-
----
+Model Details
+PropertyValueAlgorithmRandom Forest ClassifierAccuracy94.5%DatasetPIMA Indians Diabetes (style)Input FeaturesGlucose, BMI, Age, Blood Pressure, Insulin, Skin Thickness, Pregnancies, Diabetes Pedigree Function
