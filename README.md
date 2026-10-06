@@ -1,5 +1,5 @@
 #  AI-Powered Diabetes Detection
-** Determine your daily plan **
+** Determine your daily plan and meals for better life **
 
 A machine learning web application for diabetes risk prediction, with bilingual support (English & Urdu) and optional AI-powered health advice via Claude.
 Built with: Python · Flask · Scikit-learn (Random Forest) ·
